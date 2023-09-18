@@ -60,17 +60,6 @@ int main()
         std::cout << " Formula:\n    2^x+x*2^(x-1) = ";
         std::cout << std::pow(2, nReflections) + nReflections* std::pow(2, nReflections - 1) << "\n\n";
     }
-    std::cout << "--- Corpse Knight ---\n";
-    {
-        int nKnights = nReflections + 1;
-        auto result = std::format(" Results in:\n   Initial Knights Triggering {} times, the {} reflected Knights triggering {} times, each trigger causing 1 life loss to each Opponent\n   For a total life loss of {} for each opponen\n",
-            nReflections, nReflections, nReflections-1, nReflections + nReflections*(nReflections-1));
-        std::cout << result;
-        std::cout << " Formula(per oppo):\n    x+x(x-1) = x^2 = ";
-        std::cout << nReflections * nReflections << "\n";
-        std::cout << " Formula(total):\n    3*x^2 = ";
-        std::cout << nOpponents *nReflections *nReflections << "\n\n";
-    }
     std::cout << "--- Gary ---\n";
     {
         int devotion = 2*(nReflections + 1);
@@ -85,12 +74,6 @@ int main()
     std::cout << "--- 'Whenever X or another Y' ---\n";
     {
         int nTriggers = (nReflections + 1) * nReflections;
-        std::cout << "  -Nylea's Colossus-\n";
-        {
-            auto result = std::format("     Results in:\n   {} Colossus triggers, which can turn a 1 p/t into {} p/t\n",
-                nTriggers, std::pow(2, nTriggers));
-            std::cout << result;
-        }
         std::cout << "  -Coercive Recruiter-\n";
         {
             auto result = std::format("     Results in:\n   {} Recruiter triggers, which can gain control of {} creatures\n",
@@ -139,16 +122,23 @@ int main()
                 nTriggers, nTriggers*2, nOpponents*nTriggers*2);
             std::cout << result;
         }
+        std::cout << "  -Nylea's Colossus-\n";
+        {
+            auto result = std::format("     Results in:\n   {} Colossus triggers, which can turn a 1 p/t into {} p/t\n",
+                nTriggers, std::pow(2, nTriggers));
+            std::cout << result;
+            std::cout << " Formula(p/t multiplier):\n    2^(x^2+x) = ";
+            std::cout << std::pow(2, nTriggers) << "\n\n";
+        }
     }
+
+    // under Opponents control
+    std::cout << "--- Ferocidon/Poisonbelly ---\n";
+    {
+        int nTriggersPerETB = nReflections;
+        auto result = std::format(" Results in:\n   {} dmg/life loss triggers per creature entering under their control\n",
+            nTriggersPerETB);
+        std::cout << result;
+    }
+    
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
